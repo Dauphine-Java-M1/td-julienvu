@@ -2,23 +2,25 @@ package fr.dauphine.ja.vujulien.shapes;
 
 public class Circle {
  //question 2 exercice 4
-	private final Point centre;
+	private  Point centre;
 	private double rayon;
-	public Circle(Point p,double rayon) {
-		this.centre=p;
+	public Circle() {
+		centre=new Point();
+		this.rayon=3.0;
+	}
+	public Circle(Point centre,double rayon) {
+		this.centre=centre;
 		this.rayon=rayon;
 	}
-	//question 3 exercice 4
-	@Override
-	public  String toString() {
-		// TODO Auto-generated method stub
-		//si on ne met pas getX ni getY , on se trouve avec un affichage de références
-		return " le cercle de centre : (" +centre.getX() +"," +centre.getY() +")"  + " a pour rayon " + rayon;
-		//attention: mettre override ( garder le même type de retour et garder le même corps
+	public void setCenter(){
+		this.centre = centre;
 	}
-//	public String toString() {
-	//	System.out.println(" le cercle  :" +cercle + " a pour rayon " + rayon);
-	//}
+	public double getRayon() {
+		return rayon;
+	}
+	public String toString() {
+		return " le cercle de centre  :" + this.getCenter() + " a pour rayon " +  rayon + " et de  surface :"+ this.surface();
+	}
 	//solution résolvant le souci : créer une nouvelle classe de type la classe
 	public Circle translate(int deplace) {
 		return new Circle(centre,deplace);
@@ -28,13 +30,21 @@ public class Circle {
 		
 		//attention: on garde la même signature que le constructeur Circle qui n'est pas sans argument
 		this.centre.setX(this.centre.getX()+dx);
-		this.centre.setY(this.centre.getY()+dx);
+		this.centre.setY(this.centre.getY()+dy);
 	}
 	//question 7
 	public double surface() {
-		double sur=Math.PI*rayon*rayon;
+		double sur=Math.PI*this.rayon*this.rayon;
 		return sur;
 	}
+	@Override
+	public boolean equals(Object o){
+		if (!(o instanceof Circle))
+			return false;
+		Circle cer = (Circle) o;
+		return this.rayon == cer.rayon && this.centre.equals(cer.getCenter()) ;
+	}
+	
 	//question 8
 	public boolean contains(Point p) {
 		if((p.getX()-centre.getX())*(p.getX()-centre.getX())+(p.getY()-centre.getY())*(p.getY()-centre.getY())<= rayon*rayon)
@@ -57,32 +67,26 @@ public class Circle {
 	}
 	public static void main(String[]args) {
 		//Point p=new Point(1,2);
-		
 		Point p=new Point(1,2);
-		Circle c=new Circle(p,1);
-		Circle c2=new Circle(p,2);
-		//question 7
-		c.surface();
-		c2.surface();
-		//question 8
-		c2.contains(p);
-		//question 9
-		
-		
+		Circle c=new Circle(p,5);
+		Circle c2=new Circle(p,7);
+		System.out.println(c.toString());
+		System.out.println(c2.toString());
 		c2.translate(1,1);//type not applicable pour translate(int,int)inconnu
 		//et on risque de déplacer le centre
-		System.out.println(c+" "+c2);
+		//System.out.println(c+" "+c2);
 		//Circle c=new Circle(p,6);
-		System.out.println(c.toString());//exception java.lang.stackOverflowError
+		//System.out.println(c.toString());//exception java.lang.stackOverflowError
 		Circle c3=new Circle(new Point(1,2), 1);
 		//c3.getCenter().translate(1,1);
-		System.out.println(c);
+		System.out.println(c3.toString());
 		//pas de translation de point on n'a pas déplacé le cercle
 		
 	}
 
-	private Point getCenter() {
+	public Point getCenter() {
 		
-		return centre;
+		return this.centre;
 	}
+	
 }

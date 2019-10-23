@@ -1,0 +1,23 @@
+vu julien
+
+Apache Maven 3.6.0
+
+
+mvn archetype:generate \-D archetypeArtifactId=maven-archetype-quickstart \-D groupId=fr.dauphine.ja.goburdhanalvin.td00  \-D artifactId=td00 \-D interactiveMode=false
+
+6.classes et maven-status 
+
+Classpath est un paramètre passé à une machine virtuelle Java qui définit le chemin d'accès au répertoire où se trouvent les classes et les packages Java afin qu'elle les exécute.
+
+1. aucun attribut manifest principal dans target/td00-1.0-SNAPSHOT.jar
+
+
+2.java compile  puis java-cp 
+
+3.System.out.println();
+4. toString
+5. public static void main(String[] args) {
+6. GetField, SetOfInteger
+7. refactor
+
+MODIF2 exercice 

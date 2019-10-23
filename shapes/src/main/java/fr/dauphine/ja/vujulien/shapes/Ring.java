@@ -1,15 +1,20 @@
 package fr.dauphine.ja.vujulien.shapes;
 
+import java.util.ArrayList;
+
 //délégation 
 public class Ring extends Circle {
 	private Circle cir;
 	private double rayoninterne;
-	private double rayon;
+	public Ring() {
+		this.cir=new Circle();
+		this.rayoninterne=rayoninterne;
+	}
 	public Ring(Point c,double rayon,double rayoninterne) {
 	if(rayoninterne<=rayon) {
 		this.cir=new Circle(c,rayon);
 		this.rayoninterne=rayoninterne;
-		this.rayon=rayon;
+		
 		
 	}else {
 		throw new IllegalArgumentException("le rayon interne doit être inférieur au rayon");
@@ -17,10 +22,7 @@ public class Ring extends Circle {
 
 	}
 	}
-	public Ring() {
-		this.cir=cir;
-		this.rayoninterne=rayoninterne;
-	}
+	
 	@Override
 	public boolean equals(Object anneau){
 		if(anneau==this) {
@@ -30,47 +32,51 @@ public class Ring extends Circle {
 			return true;
 		}
 		Ring r=(Ring)anneau;
-		return this.cir=anneau.cir && this.rayon=anneau.rayon   &&this.rayoninterne=anneau.rayoninterne;
+		return this.rayoninterne==r.rayoninterne && this.cir.equals(r.cir);
 	}
-	}
+	
 	@Override
 	public String toString(){
-		return super.toString()+"rayon interne"+rayoninterne;
+		return super.toString()+" et comme rayon interne  "+rayoninterne;
 	}
 	//question 5 contains
 	@Override
 	public boolean contains(Point p) {
-		if((p.getX()-centre.getX())**2+(p.getY()-centre.getY())**2<=rayon**2 &&(p.getX()-centre.getX())**2+(p.getY()-centre.getY())**2>=rayoninterne) {
-			return true;
-		}
-		return false;
-		
-		
+			boolean contenu=false;
+			if (! (this.cir.contains(p)))
+				contenu=false;
+			Circle c = new Circle(this.cir.getCenter(), this.rayoninterne);
+			if(! (c.contains(p)))
+				contenu=true;
+			
+			return contenu;
 	}
 	
 	//question 6 contains
-	@Override
+	
 	public boolean contains(Point p,Ring... rings) {
 		for(Ring r:rings) {
-			if((r.contains(p)){
+			if(r.contains(p)){
 				return true;
 			}
-			return false;
+			
 			
 		}
+		return false;
 	}
 	
 	public static void main(String[ ]args) {
-		Point p=new Point(p,4)
-		Ring ring1=new Ring(p,4,1);
-		Ring ring2=new Ring(p,8,9);
-		ring.contains(p);
-		System.out.println(ring1);
-		System.out.println(ring2);
+		Point p=new Point(1,18);
+		Ring ring1=new Ring(p,54,11);
+		Ring ring2=new Ring(p,38,9);
+		ring1.contains(p);
+		//System.out.println(ring1);
+		//System.out.println(ring2);
 		ArrayList<Ring>rings=new ArrayList<Ring>();
 		rings.add(ring1);
-		rings.add(ring2);
-		System.out.println(ring1.contains(new Point(6,6),rings));
+		//rings.add(ring2);
+		System.out.println(rings);
+		System.out.println(ring1.contains(new Point(6,6)));
 		
 		
 	}
