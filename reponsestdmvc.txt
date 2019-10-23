@@ -1,3 +1,5 @@
+
+vujulien td mvc
 Exercice 1:
 Question 5: PaintComponent est appelée dans le main.
 Question 6: Différence fondamentale entre swing et awt:
