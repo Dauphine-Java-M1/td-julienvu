@@ -1,0 +1,16 @@
+
+vujulien td mvc
+Exercice 1:
+Question 5: PaintComponent est appelée dans le main.
+Question 6: Différence fondamentale entre swing et awt:
+
+Les composants AWT ont besoin du package java.awt.
+Les composants SWING ont besoin du package javax.swing.
+En terme d'implémentation, les fonctions d'AWT doivent être implémentées par le développeur.
+Alors que pour les composants SWING, ceux-ci sont des fonctions essentielles pour leur performance.
+
+
+Exercice 3:
+L'interface listener reçoit des évènements de la souris( press, release, click, enter et exist) sur un composant.
+La classe fait fonctionner l'évènement de la souris .
+

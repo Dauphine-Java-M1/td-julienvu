@@ -1,0 +1,88 @@
+TD1 ENCAPSULATION  vu julien
+
+Exercice 1:
+
+	Question 1: Le code marche puisqu'un constructeur par défaut est crée automatiquement.
+
+	Question 2: Les champs x et y privés de la classe Point ne sont pas déclarés dans la classe TestPont .Pour que cela marche, on pourrait utiliser des accesseurs.
+Ce n'est pas possible de faire appel à x et y de la classe Point car ces derniers sont deux champs privés. pour que cela fonctionne, il faudrait les déclarer en protected ou en public.
+	 Question 3 les champs d'une classe doivent être privés pour préserver une intégrité et limiter leur manipulation par d'autres classes et éviter les erreurs.
+Textpoint peut apporter une modification à ses propres champs sans que Point le sache.
+
+	Question 4: Un accesseur est une méthode écrite dans une classe permettant de récupérer la valeur d'un de ses attributs. Une telle méthode peut être utile ici.on doit faire des accesseurs ici puisque les champs sont privés
+	Question 5: problème: le constructeur TestPoint est indéfini
+	Le constructeur vide n'est plus utilisable. En effet, ce constructeur a été écrasé par le constructeur défini avec deux arguments en signature.
+On a deux options: soit rester sur un constructeur avec deux arguments ou avoir un constructeur par défaut.
+	Question 6: ca fonctionne Ne pas oublier de mettre this pour considérer les variables de l'objet et éviter toute confusion avec les paramètres.
+	Question 7:On utilise un attribut statique s'incrémentant à chaque création de chaque nouvel objet Point
+
+	Question 8: Il reconnait le constructeur à appeler en fonction du nombre d'arguments et de leurs types.
+	Question 9: On redéfini la méthode toString de la classe Objet.
+
+
+Exercice 2
+Question 1:
+		Point p1=new Point(1,2);
+		Point p2=p1;
+		//Point p3=new Point(1,2);
+		Point p3=p1;
+		System.out.println(p1==p2);
+		//true p2 et p1 mêmes adresses donc des objets identiques -> comparaison par référence
+		System.out.println(p1==p3);//false p1 et p3 pointent vers des adresses différentes donc allocation sur d'autres cases mémoires
+		// comparaison par référence ici
+		ArrayList<Point> list = new ArrayList<Point>();// problem is not allow for the source level below 1.7
+		//operation inserted inferred elements
+		list.add(p1);
+Question 3:
+La méthode indexOf renvoie un entier en renvoyant la première occurrence de l'élément spécifié dans la liste. Elle retourne -1 si l'elément n'existe pas dans la liste. La réponse est ici -1 pour p3 et 0 pour p2. Or, p1, p2 et p3 ont les mêmes coordonnées et correspondent donc au même point malgré qu'ils soient des objets différents. On aurait donc du obtenir 0 pour p3 également.
+Le but est donc ici de redéfinir la méthode indexOf à l'aide de la méthode isSameAs.
+
+
+Exercice 3: 
+
+	Question 2:  Si on dépasse la capacité autorisée, on a une exception java.lang.ArrayIndexOutOfBoundsException
+il suffit de connaitre le nombre de points  dans le tableau et comparer à la taille du tableau défini à l'aide d'une variable ou d'une méthode.
+
+	Question 5 : erreur de syntaxe si null est ajouté à contains
+on a une exception exception java.lang.NullPointerException
+		
+
+	Question 6: poitnCapacity n'est plus utile pour les ArrayList. Il n'y a pas de taille maximum pour ce type d'Objet. De plus, nbPoints n'est plus utile ici.Afin d'avoir la taille de la liste, un appel à la méthode Size déjà définie suffit .
+Pour contains, une méthode contains pour une ArrayList est déjà prédéfinie donc il faut juste l'appeler.
+
+Exercice 4
+	Question 1:
+La méthode peut renvoyer un nouveau point correspondant à la translation du point de départ ou ne rien renvoyer et modifier le point tel que ses nouvelles coordonnées soient dx et dy et non x et y.
+
+	Questions 3 et 4
+//solution résolvant le souci : créer une nouvelle classe de type la classe
+	public Circle translate(int deplace) {
+		return new Circle(centre,deplace);
+		//attention: on garde la même signature que le constructeur Circle qui n'est pas sans argument
+	}
+	public void translate(int dx,int dy) {
+		
+		//attention: on garde la même signature que le constructeur Circle qui n'est pas sans argument
+	}
+
+P a également été changé en transitant seulement le cercle c2.
+Il faut alors retourner un nouveau point lorsqu'on fait une translation du point.
+
+	Question 6
+Le résultat affiché est (1,2). Après translation, on doit avoir (1,1).Le souci c'est que le cercle n'est pas translaté car on a appelé la méthode translate de Point et non de Circle. Donc le centre du cercle n'a pas été déplacé.
+
+	Question 9
+Oui, une méthode statique est nécessaire car en ayant une liste de cercles en argument, la méthode ne va pas être appelé avec un objet instancié.
+
+
+Exercice 5 Anneau
+Question 1
+
+C'est intéressant de faire de l'héritage car il s'agit d'un cas particulier de l'objet Cercle avec une variable supplémentaire le rayon interne.
+
+Question 3
+Cela ne fonctionne pas.
+Il faut instancier l'objet Ring et son point et des accesseurs sur le rayon interne.
+Il faut redéfinir equals et toString puisqu'on est dans une situation d' héritage .
+
+
