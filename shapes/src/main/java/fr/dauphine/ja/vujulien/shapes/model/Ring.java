@@ -22,7 +22,6 @@ public class Ring extends Circle {
 
 	}
 	}
-	
 	@Override
 	public boolean equals(Object anneau){
 		if(anneau==this) {
@@ -37,7 +36,7 @@ public class Ring extends Circle {
 	
 	@Override
 	public String toString(){
-		return super.toString()+" et comme rayon interne  "+rayoninterne;
+		return "le cercle a pour centre : ["+super.getCenter().getX()+",  "+super.getCenter().getY()+" ] et comme rayon interne  "+rayoninterne;
 	}
 	//question 5 contains
 	@Override
