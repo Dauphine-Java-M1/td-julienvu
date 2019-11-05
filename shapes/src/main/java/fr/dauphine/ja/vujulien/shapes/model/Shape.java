@@ -1,13 +1,17 @@
 package fr.dauphine.ja.vujulien.shapes.model;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
-public class Shape extends World implements DrawShape{
+public abstract class Shape {
 	Point center;
-	public void paintComponent(Graphics g) {
-	}
-	public void notifyObservers(){
+    ArrayList<Shape> shapes;
+	public void addShape(Shape s) {
+		shapes.add(s);
+		notifyObserver();
+		
+		
 		
 	}
-
+	protected abstract void notifyObserver();
 }

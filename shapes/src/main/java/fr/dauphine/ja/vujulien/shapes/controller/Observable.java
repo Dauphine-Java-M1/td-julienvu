@@ -1,4 +1,4 @@
-package fr.dauphine.ja.vujulien.controller;
+package fr.dauphine.ja.vujulien.shapes.controller;
 
 public interface Observable { 
 	public void addObserver(Observer obs);

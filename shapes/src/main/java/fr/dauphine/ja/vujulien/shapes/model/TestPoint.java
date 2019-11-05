@@ -1,4 +1,4 @@
-package fr.dauphine.ja.vujulien.shapes;
+package fr.dauphine.ja.vujulien.shapes.model;
 
 import java.util.ArrayList;
 
