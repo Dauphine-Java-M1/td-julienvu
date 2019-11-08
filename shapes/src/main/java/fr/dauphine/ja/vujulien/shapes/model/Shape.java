@@ -14,4 +14,7 @@ public abstract class Shape {
 		
 	}
 	protected abstract void notifyObserver();
+	public void draw() {
+		
+	}
 }

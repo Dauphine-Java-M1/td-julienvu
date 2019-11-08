@@ -16,7 +16,7 @@ public class MyDisplay extends JPanel {
 	ArrayList<Shape> shapes;
 	public MyDisplay(World w) {
 		this.world=w;
-		this.world.addObserver(this);
+		//this.world.addObserver(this);
 	}
 	public void painComponent(Graphics g) {
 		for(Shape s:shapes) {

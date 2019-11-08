@@ -16,18 +16,23 @@ import java.util.Random;
 import fr.dauphine.ja.vujulien.shapes.model.Ring;
 
 
-public class RingDrawer  implements Drawable{
-	Ring r;
-	
+public class RingDrawer  extends Drawable{
+	Ring r=new Ring();
+	public RingDrawer() {
+		this.r=r;
+	}
 	public void paintComponent(Graphics g) {
 		Random ralea=new Random();
-		int rayoninterne=(int)r.getRayonint();
-		int height=(int)r.getRayon();
-		int x=r.getCenter().getX();
-		int y=r.getCenter().getY();
+		int rayon=(int)(2*r.getRayon());
+		int height=(int)(2*r.getRayon());
+		int rayoninterne=(int)(2*r.getRayonint());
+		int heightint=(int)(2*r.getRayonint());
+		int x=(int) (r.getCenter().getX()-r.getRayon());
+		int y=(int)(r.getCenter().getY()-r.getRayon());
 		
 		
-		g.drawOval(x, y, rayoninterne, height);
+		g.drawOval(x, y, rayoninterne, heightint);
+		g.drawOval(x,y,rayon,height);
 		
 		
 	}

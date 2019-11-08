@@ -3,16 +3,22 @@ package fr.dauphine.ja.vujulien.shapes.view;
 import java.awt.Graphics;
 
 import fr.dauphine.ja.vujulien.shapes.model.Point;
+import fr.dauphine.ja.vujulien.shapes.model.lignebrisee;
 
-public class LineDrawer implements Drawable {
-	Point p1;
-	Point p2;
-	
+public class LineDrawer extends Drawable {
+	lignebrisee l=new lignebrisee();
+	public LineDrawer(lignebrisee l) {
+		this.l=l;
+	}
 	public void paintComponent(Graphics g) {
-		p1=new Point(1,2);
-		p2=new Point(6,4);
-		g.drawLine(this.p1.getX(), this.p1.getY(), this.p2.getX(),this.p2.getY());
-		
+		int taille=l.nbPoints();
+		int debut=0;
+		Point p1,p2;
+		while(debut<taille-1) {
+			p1=l.get(debut++);
+			p2=l.get(debut);
+			g.drawLine(p1.getX(), p1.getY(), p2.getX(), p2.getY());
+		}
 	}
 	
 }

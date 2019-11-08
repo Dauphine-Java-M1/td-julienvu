@@ -16,18 +16,20 @@ import java.util.Random;
 import fr.dauphine.ja.vujulien.shapes.model.Circle;
 
 
-public class CircleDrawer  implements Drawable{
+public class CircleDrawer  extends Drawable{
 	Circle c;
+	public CircleDrawer() {
+		this.c=new Circle();
+	}
+	public CircleDrawer(Circle c) {
+		this.c=c;
+	}
 	public void paintComponent(Graphics g) {
-		Random ralea=new Random();
-		
-		int height=(int)c.getRayon();
-		int x=c.getCenter().getX();
-		int y=c.getCenter().getY();
-		
-		
-		int width=ralea.nextInt(height);
-		g.drawOval(x, y,width, height);
+		int x=(int) (c.getCenter().getX()-c.getRayon());
+		int y=(int)(c.getCenter().getY()-c.getRayon());
+		int rayon=(int)(2*c.getRayon());
+		int height=(int)(2*c.getRayon());
+		g.drawOval(x,y,rayon,height);
 		
 	}
 	

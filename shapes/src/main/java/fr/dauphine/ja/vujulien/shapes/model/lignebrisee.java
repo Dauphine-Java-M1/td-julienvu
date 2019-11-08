@@ -9,6 +9,7 @@ public class lignebrisee {
 	//private Point[] suitepoints;
 	//private ArrayList<Point>suitepoints;
 	private LinkedList<Point>suitepoints;
+	private Point p;
 	//private Vector<Point>suitepoints1;
 	private int maxPoints;
 	//question 1
@@ -32,7 +33,9 @@ public class lignebrisee {
 		
 		
 	}
-	
+	public Point get(int pos) {
+		return suitepoints.get(pos);
+	}
 	//question 3
 	public void pointCapacity(){
 		//return maxPoints;

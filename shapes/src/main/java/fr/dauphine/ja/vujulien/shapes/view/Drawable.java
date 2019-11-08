@@ -2,7 +2,10 @@ package fr.dauphine.ja.vujulien.shapes.view;
 
 import java.awt.Graphics;
 
-public interface Drawable {
+import fr.dauphine.ja.vujulien.shapes.model.Shape;
+
+public abstract class Drawable {
+	Shape s;
 	//public void draw();
-	public void paintComponent(Graphics g);
+	public abstract void paintComponent(Graphics g);
 }
