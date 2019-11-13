@@ -6,7 +6,29 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Panel {
-
+	private static int borneg;
+	private static int borned;
+	private int [] tab;
+	public Panel(int borg,int bord) {
+		if(borneg>borned) {
+			throw new IllegalArgumentException("borneg must be inferior to borned");
+		}	
+			
+			this.borneg=borg;
+			this.borned=bord;
+		
+			
+	}
+	public void remplirtab() {
+		tab=new int[this.borneg-this.borned+1];
+		for(int ind=0;ind<tab.length;ind++) {
+			tab[ind]=ind+this.borneg;
+		}
+	}
+	//question 1 test
+	public static Iterator<Integer>panel1bb(final int borneg,final int borned){
+		return (Iterator<Integer>) panel1(borneg,borned);
+	}
 	private static Iterator<Integer> panel1(final int i,final int j) {
 		//Sans classe anonyme
 		//int debut=i;
@@ -82,6 +104,10 @@ public class Panel {
 	}
 	
 	public static void main(String[] args) {
+		Iterator<Integer>it= panel1bb(1,5);
+		for(;it.hasNext();) {
+			System.out.println(it.next());
+		}
 		//Iterator<Integer>it= panel1(1,5);
 		//for(;it.hasNext();) 
 		//	System.out.println(it.next());
