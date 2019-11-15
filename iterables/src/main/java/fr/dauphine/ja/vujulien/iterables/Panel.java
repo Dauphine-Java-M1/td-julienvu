@@ -6,30 +6,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Panel {
-	private static int borneg;
-	private static int borned;
-	private int [] tab;
-	public Panel(int borg,int bord) {
-		if(borneg>borned) {
-			throw new IllegalArgumentException("borneg must be inferior to borned");
-		}	
-			
-			this.borneg=borg;
-			this.borned=bord;
-		
-			
+	public static Iterator<Integer>panel1(final int deb,final int fin){
+		return new PanelIterator(deb,fin);
 	}
-	public void remplirtab() {
-		tab=new int[this.borneg-this.borned+1];
-		for(int ind=0;ind<tab.length;ind++) {
-			tab[ind]=ind+this.borneg;
-		}
-	}
-	//question 1 test
-	public static Iterator<Integer>panel1bb(final int borneg,final int borned){
-		return (Iterator<Integer>) panel1(borneg,borned);
-	}
-	private static Iterator<Integer> panel1(final int i,final int j) {
+	private static Iterator<Integer> panel1bis(final int i,final int j) {
 		//Sans classe anonyme
 		//int debut=i;
 		
@@ -77,7 +57,7 @@ public class Panel {
 			//Override iterator
 			public Iterator<Integer> iterator() {
 				//retourner le panel1 question 1
-				return panel1(i,j);
+				return panel1bis(i,j);
 				// TODO Auto-generated method stub
 				
 			}
@@ -104,16 +84,14 @@ public class Panel {
 	}
 	
 	public static void main(String[] args) {
-		Iterator<Integer>it= panel1bb(1,5);
-		for(;it.hasNext();) {
-			System.out.println(it.next());
-		}
 		//Iterator<Integer>it= panel1(1,5);
 		//for(;it.hasNext();) 
 		//	System.out.println(it.next());
+		Iterator<Integer>it1= panel1bis(1,5);
+		for(;it1.hasNext();) 
+			System.out.println(it1.next());
 		for (int i:panel2(1,5))
 			System.out.println(i);
-		
 		List<Integer> l=panel(3,6);
 		for (int i:l) {
 			System.out.println(i);
