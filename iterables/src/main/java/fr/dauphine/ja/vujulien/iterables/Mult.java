@@ -11,12 +11,13 @@ import java.util.RandomAccess;
 public class Mult {
 	//question 1 exercice 2
 	public static List<Integer>mulT(final int coeff,List<Integer>liste){
-		
+		//création une nouvelle liste newlist
+		List<Integer>newlist = new ArrayList<Integer>();
 		for(int i=0;i<liste.size();i++) {
 			int value=liste.get(i)*coeff;
-			System.out.println(value);
+			newlist.add(value);
 		}
-		return liste;
+		return newlist;
 		
 	}
 	//question 2 exercice 2
@@ -24,9 +25,9 @@ public class Mult {
 		return new AbstractList<Integer>() {
 
 			@Override
-			public Integer get(int arg0) {
+			public Integer get(int indice) {
 				// TODO Auto-generated method stub
-				return liste.get(arg0)*coeff;
+				return liste.get(indice)*coeff;
 			}
 
 			@Override
@@ -121,14 +122,13 @@ public class Mult {
 	public static void main(String[] args) {
 		ArrayList<Integer> l1=new ArrayList<Integer>();
 		//question 1 exercice 2
-		//ArrayList<Integer>l1=new ArrayList<Integer>();
 		l1.add(new Integer(3));
 		l1.add(new Integer(6));
 		l1.add(new Integer(7));
-		//List<Integer>l=mult(3,l1);
-		//for(int i:l) {
-		//	System.out.println(i);//9 18 21
-		//}
+		List<Integer>l=mult(3,l1);
+		for(int i:l) {
+			System.out.println(i);//9 18 21
+		}
 		List<Integer>l3=mulT(3,l1);
 		for(int i:l3) {
 			System.out.println(i);//9 18 21
@@ -157,10 +157,6 @@ public class Mult {
 		sum+=val/2;
 		}
 		System.out.println((System.nanoTime() - t0));
-		// le temps d'éxécution est beaucoup plus longue pour une linkedList<Integer> 
-		//que pour une ArrayList <Integer>
-		//la complexité en espace pour une  ArrayList est moins elévé pour un parcours de boucle.
 		
-		//en utilisant randomAccess et listIterator, l'écart sur le temps d'éxécution est fortement réduit
 	}
 }

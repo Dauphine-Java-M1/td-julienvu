@@ -7,29 +7,14 @@ import java.util.NoSuchElementException;
 
 public class Panel {
 	public static Iterator<Integer>panel1(final int deb,final int fin){
-		return new PanelIterator(deb,fin);
+		return (Iterator<Integer>) new PanelIterator(deb,fin);
 	}
 	private static Iterator<Integer> panel1bis(final int i,final int j) {
-		//Sans classe anonyme
-		//int debut=i;
 		
-		//public boolean hasNext() {
-			
-		//	return debut<=j;
-		//}
-
-		//public Integer next() {
-			//if(!hasNext()) {
-				//il n'y a plus d'élements 
-				//throw new NoSuchElementException();
-			//}
-			//return debut++;
-			
-		//}
 		//avec classe anonyme question 2
 		//commencer par return question1 exercice1
 		return new Iterator<Integer>() {
-			int debut=i;
+			int debut=i;//copie défensive
 
 			public boolean hasNext() {
 				
@@ -45,20 +30,16 @@ public class Panel {
 				
 			}
 			
-		};
-		
-		
-	
-		
+		};	
 	}
-	//question 3 exercice 1 itérateurs
+	//question 3 exercice 1 itérateurs (iterable car for(each)
 	public static Iterable<Integer>panel2(final int i,final int j){
 		return new Iterable<Integer>() {
-			//Override iterator
+			@Override
 			public Iterator<Integer> iterator() {
-				//retourner le panel1 question 1
-				return panel1bis(i,j);
-				// TODO Auto-generated method stub
+				
+				return panel1bis(i,j);//retourner un itérateur de la question 2
+				
 				
 			}
 			
@@ -84,9 +65,9 @@ public class Panel {
 	}
 	
 	public static void main(String[] args) {
-		//Iterator<Integer>it= panel1(1,5);
-		//for(;it.hasNext();) 
-		//	System.out.println(it.next());
+		Iterator<Integer>it= panel1(1,5);
+		for(;it.hasNext();) 
+			System.out.println(it.next());
 		Iterator<Integer>it1= panel1bis(1,5);
 		for(;it1.hasNext();) 
 			System.out.println(it1.next());
