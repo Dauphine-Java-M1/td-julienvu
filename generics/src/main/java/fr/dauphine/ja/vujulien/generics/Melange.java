@@ -3,7 +3,7 @@ package fr.dauphine.ja.vujulien.generics;
 public class Melange
 {
 
-	private Random rnd;
+	
 	//question 1
 	public static <T> void swap(List<T> list,int entier1,int entier2){
 		if(i >= list.size() || j >= list.size() || i < 0 || j < 0){
