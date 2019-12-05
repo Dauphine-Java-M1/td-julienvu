@@ -6,44 +6,29 @@ public class Melange
 	private Random rnd;
 	//question 1
 	public static <T> void swap(List<T> list,int entier1,int entier2){
-		final List<T> l=list;
-		l.set(i,l.set(j,l.get(i)));
+		if(i >= list.size() || j >= list.size() || i < 0 || j < 0){
+            throw new IndexOutOfBoundsException("i or j is out of bounds");
+        }
+        //utiliser méthodes get et set
+        T t1=list.get(i);
+        T t2=list.get(j);
+		list.set(i,t2);
+		list.set(j,t1);
 	}
 
 	//question 2
 	public static <T> void shuffle(List<T>liste){
-		if(rand==null){
-			rand=new Random();
+		Random rand=new Random();
+		for(int ind=1;ind<list.size();ind++){
+			int suivant=rand.nextInt(ind+1);
+			swap(liste,i,suivant);
 		}
-		int size=list.size();
-		if(list instanceof RandomAccess ){
-			for(int i=size;i>1;i--){
-				swap(list,i-1,rand.nextInt(i));
-			}
-		}else{
-			Object arr[]=list.toArray();
-
-			for(int ind=size;ind>1;ind--){
-				swap(arr,ind-1,rand.nextInt(ind));
-			}
-			ListIterator<T> it=list.ListIterator();
-			int i=0;
-			while(it.hasNext()){
-				it.next();
-				it.set((T)arr[i++]);
-			}
-		}
+		
 	}
-	//question 2
-	public static <T> List<T> shuffled(List<T> liste){
-
-		this.shuffle(liste);
-		return liste;
-	}
-
+	
 	//question 3
 
-	//	Collections.shuffle(list,this.rnd);
+	//	Collections.shuffle(list,new Random());
 
 	public static void main(String[] args ){
 

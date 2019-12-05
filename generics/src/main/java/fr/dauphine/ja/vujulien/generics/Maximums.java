@@ -6,7 +6,7 @@ package fr.dauphine.ja.vujulien.generics;
  * @param <T>
  *
  */
-public class Maximums<T> implements Comparable<T>
+public class Maximums
 {
 	
 	public static <T extends Comparable<T>> T myMax(T maximum1,T ...tableaumax) {
@@ -18,18 +18,6 @@ public class Maximums<T> implements Comparable<T>
 			}
 		}
 		return valeur;
-	}
-	
-	public int compareTo(T o) {
-		int res=0;
-		if(o==null) {
-			throw new  IllegalArgumentException("o cannot be null");
-			
-		}
-		if(o.getClass()!=this.getClass()) {
-			throw new  IllegalArgumentException("Caution: o and this are different classes . It couldn't be compared each other");
-		}
-		return res;
 	}
 	//redéfinition méthode equals
 	@Override
