@@ -1,42 +1,58 @@
 package fr.dauphine.ja.vujulien.generics;
 
-public class Melange
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+/**
+ * Hello world!
+ *
+ */
+public class Melange 
 {
-
-	
-	//question 1
-	public static <T> void swap(List<T> list,int entier1,int entier2){
-		if(i >= list.size() || j >= list.size() || i < 0 || j < 0){
-            throw new IndexOutOfBoundsException("i or j is out of bounds");
-        }
-        //utiliser méthodes get et set
-        T t1=list.get(i);
-        T t2=list.get(j);
-		list.set(i,t2);
-		list.set(j,t1);
-	}
-
-	//question 2
-	public static <T> void shuffle(List<T>liste){
-		Random rand=new Random();
-		for(int ind=1;ind<list.size();ind++){
-			int suivant=rand.nextInt(ind+1);
-			swap(liste,i,suivant);
-		}
+    public static <T> void swap(List<T> liste,int indice1,int indice2) {
+    	T element1=liste.get(indice1);
+    	T element2=liste.get(indice2);
+    	liste.set(indice1, element2);
+    	liste.set(indice2, element1);
+		
+    	
+    	
+    }
+  //question 2
+  	public static <T> void shuffle(List<T>liste){
+  		Random rand=new Random();
+  		for(int ind=1;ind<liste.size();ind++){
+  			int suivant=rand.nextInt(ind+1);
+  			swap(liste,ind,suivant);
+  		}
+		System.out.println(liste);
+  		
+  }
+  	public static   void shufflebis(List<?> list,
+  		    Random rnd) {
+  		
+  		for(int ind=1;ind<list.size();ind++){
+  			int suivant=rnd.nextInt(ind+1);
+  			swap(list,ind,suivant);
+  		}
+		
+  		
+  	}
+    public static void main(String[] args) {
+    	Random rnd=new Random();
+		List liststring=new ArrayList();
+		liststring.add("a");
+		liststring.add("b");
+		liststring.add("c");
+		liststring.add("d");
+		System.out.println("liststring  : " + liststring);
+		//List listfinal=swap(liststring,1,2);
+		this.shuffle(liststring);
+		
+		this.shufflebis(liststring,rnd);
+		
 		
 	}
-	
-	//question 3
-
-	//	Collections.shuffle(list,new Random());
-
-	public static void main(String[] args ){
-
-		List<T> l1={5,3,9,23,67657};
-		l1.swap();
-		this.shuffle(l1);
-		l1.shuffled();
-	}
-
-	
 }
