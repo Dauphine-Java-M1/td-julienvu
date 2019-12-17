@@ -58,10 +58,10 @@ public class Mult {
 		
 		return new AbstractSequentialList<Integer>() {
 
-			public ListIterator<Integer>listIterator(final int index) {
+			public ListIterator<Integer> listIterator(final int index) {
 				// TODO Auto-generated method stub
 				return new ListIterator<Integer>() {
-					ListIterator<Integer>it=liste.listIterator(index);
+					ListIterator<Integer> it=liste.listIterator(index);
 					public void add(Integer entier) {
 						
 						it.add(entier);
@@ -119,12 +119,14 @@ public class Mult {
 	
 		};
 		}
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
-		ArrayList<Integer> l1=new ArrayList<Integer>();
+		List<Integer> l1=new ArrayList<Integer>();
 		//question 1 exercice 2
+		l1.add(new Integer(2));
 		l1.add(new Integer(3));
 		l1.add(new Integer(6));
-		l1.add(new Integer(7));
+		
 		List<Integer>l=mult(3,l1);
 		for(int i:l) {
 			System.out.println(i);//9 18 21
@@ -160,3 +162,4 @@ public class Mult {
 		
 	}
 }
+
