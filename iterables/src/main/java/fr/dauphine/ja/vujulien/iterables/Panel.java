@@ -1,14 +1,17 @@
 package fr.dauphine.ja.vujulien.iterables;
-
 import java.util.AbstractList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Panel {
-	public static Iterator<Integer>panel1(final int deb,final int fin){
-		return (Iterator<Integer>) new PanelIterator(deb,fin);
+	
+	//question 1 exo 1
+	public static Iterator<Integer> panel1(final int deb,final int fin){
+		return new PanelIterator(deb,fin);
 	}
+	
+	//question 2 exercice 1
 	private static Iterator<Integer> panel1bis(final int i,final int j) {
 		
 		//avec classe anonyme question 2
@@ -32,13 +35,15 @@ public class Panel {
 			
 		};	
 	}
+	
+	
 	//question 3 exercice 1 itérateurs (iterable car for(each)
-	public static Iterable<Integer>panel2(final int i,final int j){
+	public static Iterable<Integer> panel2(final int i,final int j){
 		return new Iterable<Integer>() {
 			@Override
 			public Iterator<Integer> iterator() {
 				
-				return panel1bis(i,j);//retourner un itérateur de la question 2
+				return panel1(i,j);//retourner un itérateur de la question 2
 				
 				
 			}
@@ -84,5 +89,6 @@ public class Panel {
 	}
 
 }
+
 
 
