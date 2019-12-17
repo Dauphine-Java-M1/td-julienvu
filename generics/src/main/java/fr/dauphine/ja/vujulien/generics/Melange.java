@@ -12,6 +12,9 @@ import java.util.Random;
 public class Melange 
 {
     public static <T> void swap(List<T> liste,int indice1,int indice2) {
+	if(indice1 >= list.size() || indice2 >= list.size() || indice1 < 0 || indice2 < 0){
+            throw new IndexOutOfBoundsException("i or j is out of bounds");
+        }
     	T element1=liste.get(indice1);
     	T element2=liste.get(indice2);
     	liste.set(indice1, element2);
