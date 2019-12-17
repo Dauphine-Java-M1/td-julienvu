@@ -26,9 +26,20 @@ public class BeWild {
 		
 	}
 	
-	//Exercice 3
+	//Exercice 3 tp generics
 	
-	public static <T> List<T> listLength(List<? extends T> list) {
+	//variable de type T
+	public static <T> List<T> listLength(List<T> list) {
+		ArrayList length=new ArrayList<T>();
+		for(int i=0;i<list.size();i++) {
+			CharSequence seq =(CharSequence )list.get(i);
+			length.add(seq.length());
+		}
+		return length;
+	}
+	
+	//avec Wildcard
+	public static   List listLength1(List<?> list) {
 		ArrayList length=new ArrayList();
 		for(int i=0;i<list.size();i++) {
 			CharSequence seq =(CharSequence )list.get(i);
@@ -40,8 +51,12 @@ public class BeWild {
 		List<String >list=Arrays.asList("foo","toto","julien");
 		print(list);
 		Charlength(list);
+		
+		
 		List<String >l=Arrays.asList("colonel","reyel");
-		System.out.println(listLength(l));
+		System.out.println(listLength(l));//7 5
+		System.out.println(listLength1(l));//7 5
+		
 	}
 	
 }
