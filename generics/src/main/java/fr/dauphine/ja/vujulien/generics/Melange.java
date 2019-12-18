@@ -37,8 +37,14 @@ public class Melange
   		    Random rnd) {
   		
   		for(int ind=1;ind<list.size();ind++){
-  			int suivant=rnd.nextInt(ind+1);
-  			swap(list,ind,suivant);
+        if (!(list instanceof RandomAccess)){
+    			int suivant=rnd.nextInt(ind+1);
+          list.toArray()
+    			System.out.println(list.toArray());
+          shuffle(list);
+
+
+        }
   		}
 		
   		
