@@ -58,7 +58,7 @@ public class MySafeList {
 	
 	
 	public static double scalarAlea(MySafeList l1,MySafeList l2) {
-		//sans argument
+		//avec vecteurs aléatoires
 		
 		if(l1.size()!=l2.size()) {
 			throw new IllegalArgumentException("v1 et v2 doivent être de même dimension");
@@ -142,9 +142,9 @@ public class MySafeList {
 		l.add(2.1);
 		l.add(234.23);
 		l.add(15.1);
-		System.out.println("résultat de stressTest: "+l.stressTest(2,3));//true
-		System.out.println("résultat de stressTest: "+l.stressTest(2,6));//true
-		System.out.println("résultat de stressTest: "+l.stressTest(2,1));//false
+		System.out.println("résultat de stressTest avec n=2 et m=3: "+l.stressTest(2,3));//true
+		System.out.println("résultat de stressTest avec n=2 et m=6: "+l.stressTest(2,6));//true
+		System.out.println("résultat de stressTest avec n=2 et m=1: "+l.stressTest(2,1));//false
 		
 		//Exercice 3 question 1
 		
@@ -178,6 +178,7 @@ public class MySafeList {
 		MySafeList l1=new MySafeList(n);
 		MySafeList l2=new MySafeList(n);
 		System.out.println("le produit scalaire entre 0 et n-1 entre deux vecteurs aléatoires vaut: "+MySafeList.scalarAlea(l1,l2));
+		
 		
 		//test question 3
 		MySafeList l3=new MySafeList(n);
