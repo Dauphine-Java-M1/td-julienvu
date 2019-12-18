@@ -4,31 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySafeList {
-	public static ArrayList<Double>l;
-	private static int n;
 	
-	public MySafeList(int n1) {
-		l=new ArrayList<Double>();
-		this.n=n1;
+	private static int n;
+	private ArrayList<Double> l;
+	
+	
+	public MySafeList(int n) {
+		
+		this.n=n;
+		l=new ArrayList<Double>(n);
+		
+		
 	}
+	
 	public synchronized void add (Double d) {
-		l.add(d);
+		
+			l.add(d);
+		
 	}
 	public synchronized int size() {
+		
 		return l.size();
 	}
 	public synchronized Double get(int position) {
+		
 		return l.get(position);
 	}
 	
-	public static int scalar(MySafeList v1,MySafeList v2) {
+	public static double scalar(MySafeList v1,MySafeList v2) {
+		
 		if(v1.size()!=v2.size()) {
-			throw new IllegalArgumentException("v1 et v2 de même dimension");
+			throw new IllegalArgumentException("v1 et v2 doivent être de même dimension");
 		}
-		int prod=0;
+		
+		double prod=0;
+		
 		for(int i=0;i<n;i++) {
 			
-			prod+=v1.get(i)*v2.get(i);
+			
+				prod += v1.get(i)* v2.get(i);
+			
 			
 		}
 		return prod;
@@ -37,8 +52,9 @@ public class MySafeList {
 	
 	//question 2
 	public synchronized  boolean stressTest(int n,int m) {
-			List<Thread>t=new ArrayList<Thread>();
-			try {
+			
+		List<Thread>t=new ArrayList<Thread>();
+		try {
 				synchronized(t) {
 				for(int i=0;i<n;i++) {
 					Thread t1=new Thread();
@@ -53,7 +69,7 @@ public class MySafeList {
 					return false;
 				}
 				}
-			}catch(InterruptedException e) {
+		}catch(InterruptedException e) {
 				e.printStackTrace();
 			}
 			return true;
@@ -68,15 +84,31 @@ public class MySafeList {
 		System.out.println("résultat de stressTest: "+l.stressTest(2,3));//true
 		System.out.println("résultat de stressTest: "+l.stressTest(2,6));//true
 		System.out.println("résultat de stressTest: "+l.stressTest(2,1));//false
+		
+		//Exercice 3 question 1
+		
 		MySafeList v1=new MySafeList(3);
 		MySafeList v2=new MySafeList(3);
+		
 		v1.add(3.0);
-		v1.add(1.0);
-		v1.add(2.0);
+		v1.add(3.0);
+		v1.add(3.0);
 		v2.add(1.0);
 		v2.add(1.0);
 		v2.add(1.0);
-		System.out.println(MySafeList.scalar(v1, v2));
+		System.out.println(MySafeList.scalar(v1, v2));//9.0
+		MySafeList v4=new MySafeList(4);
+		MySafeList v5=new MySafeList(4);
+		v4.add(3.0);
+		v4.add(2.0);
+		v4.add(1.0);
+		v4.add(4.0);
+		v5.add(1.0);
+		v5.add(2.0);
+		v5.add(3.0);
+		v5.add(5.0);
+		System.out.println(MySafeList.scalar(v4, v5));//30.0
+		
 		
 		
 		
