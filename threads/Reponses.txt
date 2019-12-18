@@ -1,0 +1,5 @@
+Exercice 1 Concurrence
+
+5. La valeur de n est dessous de 10000 .
+
+Explication à cela: la valeur de n est partagée par les deux threads et il se peut qu'un des deux threads modifié en même temps la valeur de n de l'autre thread .
