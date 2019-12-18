@@ -33,6 +33,9 @@ public class Melange
 		System.out.println(liste);
   		
   }
+
+
+  //question 3
   	public static   void shufflebis(List<?> list,
   		    Random rnd) {
   		
