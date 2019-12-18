@@ -51,16 +51,16 @@ public class Melange
   	}
     public static void main(String[] args) {
     	Random rnd=new Random();
-		List liststring=new ArrayList();
+		List<String> liststring=new ArrayList();
 		liststring.add("a");
 		liststring.add("b");
 		liststring.add("c");
 		liststring.add("d");
 		System.out.println("liststring  : " + liststring);
 		//List listfinal=swap(liststring,1,2);
-		this.shuffle(liststring);
+		Melange.shuffle(liststring);
 		
-		this.shufflebis(liststring,rnd);
+		Melange.shufflebis(liststring,rnd);
 		
 		
 	}
