@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class MySafeList {
+public class MySafeList extends  ArrayList<Double>{
 	
 	private static int n;
 	private ArrayList<Double> l;
@@ -19,22 +19,31 @@ public class MySafeList {
 		
 	}
 	
-	//méthode ajout de doubles
-	public synchronized void add (Double d) {
+	//méthode ajout de double
+	@Override
+	public boolean add (Double d) {
 		
-			l.add(d);
+			return super.add(d);
 		
 	}
 	
+	
+	//Méthodes get et size à implémenter donc mieux vaut faire de l'héritage
+	
 	//méthode size
+	@Override
 	public synchronized int size() {
 		
 		return l.size();
 	}
+	
+	
 	//méthode d'accès à un élément de la liste l
+	
+	@Override
 	public synchronized Double get(int position) {
 		
-		return l.get(position);
+		return super.get(position);
 	}
 	
 	
@@ -118,6 +127,7 @@ public class MySafeList {
 		}
 	
 	//Exercice 2 question 2
+		
 	public synchronized  boolean stressTest(int n,int m) {
 			
 		List<Thread>t=new ArrayList<Thread>();
