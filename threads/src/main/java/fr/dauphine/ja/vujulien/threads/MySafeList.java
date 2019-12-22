@@ -6,18 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 public class MySafeList extends  ArrayList<Double>{
+	private Object monitorAdd = new Object();
 	
-	private static int n;
-	private ArrayList<Double> l;
-	
-	
-	public MySafeList(int n) {
-		
-		this.n=n;
-		l=new ArrayList<Double>(n);
-		
-		
-	}
 	
 	//méthode ajout de double
 	@Override
@@ -34,7 +24,7 @@ public class MySafeList extends  ArrayList<Double>{
 	@Override
 	public synchronized int size() {
 		
-		return l.size();
+		return super.size();
 	}
 	
 	
@@ -46,7 +36,44 @@ public class MySafeList extends  ArrayList<Double>{
 		return super.get(position);
 	}
 	
+	//Exercice 2 question 2
 	
+		public static  boolean stressTest(int n,final int m) throws InterruptedException {
+				
+			final MySafeList listthreads=new MySafeList();//create n threads 
+			Thread[] threads=new Thread[n];
+		
+			for(int i=0;i<n;i++) {
+				threads[i]=new Thread(new Runnable() {
+					public void run() {
+						for (int j=0;j<m;j++) {
+							listthreads.add(2.0);
+						}
+					}
+				});
+				
+				
+				
+			}
+			for(int i=0;i<n;i++) {
+				threads[i].start();
+			
+				
+			}
+			for(int i=0;i<n;i++) {
+				threads[i].join();
+			
+				
+			}
+			System.out.println("List size is " +listthreads.size() + " and should be " + n * m);
+			//si taille de l différent du produit n*m
+			
+
+			
+				return listthreads.size()==n*m;
+				
+				
+		}
 	//Exercice 3 question 1
 	public static double scalar(MySafeList v1,MySafeList v2) {
 		//si v1 et v2 de tailles différentes
@@ -56,13 +83,12 @@ public class MySafeList extends  ArrayList<Double>{
 		
 		double prod=0;
 		
-		for(int i=0;i<n;i++) {
-			
-			
-				prod += v1.get(i)* v2.get(i);
-			
-			
-		}
+		
+        
+        for (int i = 0; i < v1.size(); i++) {
+            prod+= (v1.get(i) * v2.get(i));
+        }
+        
 		return prod;
 		
 	}
@@ -70,27 +96,15 @@ public class MySafeList extends  ArrayList<Double>{
 	//Exercice 3 question 2
 	
 	
-	public static double scalarAlea(MySafeList l1,MySafeList l2) {
+	public static MySafeList scalarAlea(int n) {
 		//avec vecteurs aléatoires
-		//si v1 et v2 de tailles différentes
-		if(l1.size()!=l2.size()) {
-			throw new IllegalArgumentException("v1 et v2 doivent être de même dimension");
-		}
-		
-		double prod=0;
 		Random r=new Random();
-		Double suiv=r.nextDouble();//entier aléatoire
-		for(int ajout=0;ajout<n;ajout++) {
-			  	l1.add(suiv);
-			  	l2.add(suiv);
+		MySafeList mysafe=new MySafeList();
+		for(int indice=0;indice<n;indice++) {
+			mysafe.add(r.nextDouble());
 		}
+		return mysafe;
 		
-		//produit scalaire
-		for(int indvec=0;indvec<n;indvec++) {
-			
-			prod += l1.get(indvec)*l2.get(indvec);
-		}
-		return prod;
 		
 	}
 	
@@ -106,107 +120,108 @@ public class MySafeList extends  ArrayList<Double>{
 				throw new IllegalArgumentException("v1 et v2 doivent être de même dimension");
 			}
 			//si begin est un indice négatif et end supérieure à la taille maximale de la liste
-			if(begin<0 || end> n) {
+			if(begin<0 || end> l1.size()|| end> l2.size()) {
 				throw new IllegalArgumentException("begin et end must be redefined");
 			}
 			
-			double prod=0;
-			Random r=new Random();
-			Double suiv=r.nextDouble();//entier aléatoire
-			for(int ajout=0;ajout<n;ajout++) {
-				  	l1.add(suiv);
-				  	l2.add(suiv);
+			double prod=0.0;
+			for(int i=begin;i<end;i++) {
+				prod+=(l1.get(i)*l2.get(i));
 			}
-			//produit scalaire entre l1 et l2
-			for(int indvec=begin;indvec<=end;indvec++) {
-				
-				prod += l1.get(indvec)*l2.get(indvec);
-			}
+			
 			return prod;
 			
 		}
 	
-	//Exercice 2 question 2
+	//exercice 3 question 4
 		
-	public synchronized  boolean stressTest(int n,int m) {
-			
-		List<Thread>t=new ArrayList<Thread>();
-		try {
-				synchronized(t) {
-					for(int i=0;i<n;i++) {
-						Thread t1=new Thread();
-						t.add(t1);
-						t1.start();
-						t1.join();
-					}
-					
-					//ajout des m entiers 
-					for(int j=0;j<m;j++) {
-						l.add((double) j);
-					}
-					//si taille de l différent du produit n*m
-					if(l.size()!=n*m) {
-						return false;
-					}
-				}
-		}catch(InterruptedException e) {
-				e.printStackTrace();
-			}
-			return true;
-			
-			
-	}
-	public static void main(String []args) {
+	//voir classe ScalarThread	
 		
+	//exercice 3 question 5
+		public static double parallelScalar(MySafeList v1, MySafeList v2, int n) {
+	        ScalarThread[] threads = new ScalarThread[n];
+	        int portionLength = v1.size() / n;
+	        double res = 0;
+
+	        // Create n threads
+	        for (int decomp = 0; decomp < n - 1; decomp++) {
+	            threads[decomp] = new ScalarThread(v1, v2, decomp * portionLength, (decomp + 1) * portionLength);
+	            threads[decomp].start();
+	        }
+	        threads[n - 1] = new ScalarThread(v1, v2, (n - 1) * portionLength, v1.size());
+	        threads[n - 1].start();
+
+	        // Sum the results
+	        try {
+	            for (int i = 0; i < n; i++) {
+	                threads[i].join();
+	                res += threads[i].getResult();
+	            }
+
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }
+
+	        return res;
+	    }
+
+	public static void main(String []args) throws InterruptedException {
+		long debut;
+        long fin;
+        long time;
+        double res;
+        int n = 10000;
+        MySafeList myList1 = scalarAlea(n);
+        MySafeList myList2 = scalarAlea(n);
 		
 		//test question 3 exercice 2
-		MySafeList l=new MySafeList(3);
-		l.add(2.1);
-		l.add(234.23);
-		l.add(15.1);
-		System.out.println("résultat de stressTest avec n=2 et m=3: "+l.stressTest(2,3));//true
-		System.out.println("résultat de stressTest avec n=2 et m=6: "+l.stressTest(2,6));//true
-		System.out.println("résultat de stressTest avec n=2 et m=1: "+l.stressTest(2,1));//false
+		
+		System.out.println("résultat de stressTest avec n=2 et m=3: "+stressTest(2,3));//true
+		System.out.println("résultat de stressTest avec n=2 et m=6: "+stressTest(6,6));//true
+		System.out.println("résultat de stressTest avec n=2 et m=1: "+stressTest(2,1));//true
 		
 		
 		//test question 1 exercice 3
-		MySafeList v1=new MySafeList(3);
-		MySafeList v2=new MySafeList(3);
-		
-		
-		
-		v1.add(3.0);
-		v1.add(3.0);
-		v1.add(3.0);
+		MySafeList v1=new MySafeList();
+		MySafeList v2=new MySafeList();
+		v1.add(1.0);
+		v1.add(1.0);
+		v2.add(6.0);
 		v2.add(1.0);
-		v2.add(1.0);
-		v2.add(1.0);
-		System.out.println(MySafeList.scalar(v1, v2));//9.0
 		
-		//test question 1 exercice 3
-		MySafeList v4=new MySafeList(4);
-		MySafeList v5=new MySafeList(4);
-		v4.add(3.0);
-		v4.add(2.0);
-		v4.add(1.0);
-		v4.add(4.0);
-		v5.add(1.0);
-		v5.add(2.0);
-		v5.add(3.0);
-		v5.add(5.0);
-		System.out.println("le produit scalaire entre 0 et n-1 entre deux vecteurs arbitraires vaut: "+MySafeList.scalar(v4, v5));//30.0
+		System.out.println("le produit scalaire entre 0 et n-1 entre deux vecteurs arbitraires vaut: "+MySafeList.scalar(v1, v2));//7.0
+		//System.out.println(MySafeList.scalar(v1, v2));//9.0
 		
 		//test question 2 exercice 3
-		MySafeList l1=new MySafeList(n);
-		MySafeList l2=new MySafeList(n);
-		System.out.println("le produit scalaire entre 0 et n-1 entre deux vecteurs aléatoires vaut: "+MySafeList.scalarAlea(l1,l2));
+		
+		
+		System.out.println("le produit scalaire entre 0 et n-1 entre deux vecteurs arbitraires vaut: "+MySafeList.scalarAlea(2));//[0.6227393290943323, 0.8874681002469953]
+		
+		//test question 2 exercice 3
+	//	MySafeList l1=;
+	//	MySafeList l2=;
+		//System.out.println("le produit scalaire entre 0 et n-1 entre deux vecteurs aléatoires vaut: "+MySafeList.scalarAlea(l1,l2));
 		
 		
 		//test question 3 exercice 3
-		MySafeList l3=new MySafeList(n);
-		MySafeList l4=new MySafeList(n);
-		System.out.println("le produit scalaire entre begin et end vaut: "+  MySafeList.scalarParallele(l3,l4, 1, 3));
+	//	MySafeList l3=;
+	//	MySafeList l4=;
+		//System.out.println("le produit scalaire entre begin et end vaut: "+  MySafeList.scalarParallele(l3,l4, 1, 3));
 
+        for (int i = 1; i <= 20; i++) {
+            debut = System.nanoTime();
+            res = parallelScalar(myList1, myList2, i);
+            fin = System.nanoTime();
+            time = fin - debut;
+            System.out.println("i=" + i + " | res : " + res + " , time : " + time * 10E-9);
+        }
+
+        System.out.println("=============================================");
+        debut = System.nanoTime();
+        res = scalarParallele(myList1, myList2, 0, n);
+        fin = System.nanoTime();
+        time = fin - debut;
+        System.out.println("Ground truth | res : " + res + ", time : " + time * 10E-9);
 
 		
 		
