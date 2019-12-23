@@ -3,3 +3,18 @@ Exercice 1 Concurrence
 5. La valeur de n est dessous de 10000 .
 
 Explication à cela: la valeur de n est partagée par les deux threads et il se peut qu'un des deux threads modifié en même temps la valeur de n de l'autre thread .
+
+Déclarer un monitor de type Object et un boolean flag qui donne le signal à un des deux threads de se mettre en mode exécution.
+
+Exercice 2:
+
+1. mieux vaut faire de l'héritage puisqu'on va coder seulement deux méthodes get et size().
+
+
+5. Non, car il n'y a pas forcément de cas ou il y a aura une exécution en temps fini des threads qui auront accès en lecture à la liste.
+
+Scénario problématique:
+
+
+
+
