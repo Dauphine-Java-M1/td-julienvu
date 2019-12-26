@@ -3,21 +3,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 
 
 public class Fusion  {
 	//method fusion attention aux brackets devant le type paramétré T
-	public static  <T> List<T> Fusion(List<? extends T> L1,List<? extends T> L2){
+	public static  <T> List<T> fusion(List<? extends T> L1,List<? extends T> L2){
 		int curseuralternance=0;//variable int qui va ajouter dans la liste finale fusionnée
 		//soit l'un des élements de la liste L1 ou soit celui de la liste L2
 		//si L1 et L2 sont de tailles différentes, on retourne une exception
 		if(L1.size()!=L2.size()) {
 			throw new IllegalArgumentException("L1 must be different size to L2");//throw new syntax java
 		}
-		//si L1 est vide
+		//si L1 est vide ou L2 est vide
 		if(L1.isEmpty()|| L2.isEmpty() ) {
 			return Collections.<T>emptyList();//objet immutable ou on ne peut pas ajouter d'objets dedans
 		}
@@ -38,7 +37,7 @@ public class Fusion  {
 					solutionfusion.add(iter2.next());
 				}
 			}else {
-				if(iter1.hasNext()) {
+				if(iter2.hasNext()) {
 					solutionfusion.add(iter2.next());
 				}else {
 					solutionfusion.add(iter1.next());
@@ -61,15 +60,15 @@ public class Fusion  {
 	public static void main(String[] args) {
 		List<String> l1=  Arrays.asList("C", "rc");
 		List<StringBuilder> l2= Arrays.asList(new StringBuilder("a ma"), new StringBuilder("he!"));
-		List<? extends CharSequence> r1=Fusion(l1,l2);
+		List<? extends CharSequence> r1=fusion(l1,l2);
 		System.out.println(r1);
-		List<?> r2=Fusion(l1,l2);
+		List<?> r2=fusion(l1,l2);
 		System.out.println(r2);
 		List<Integer> l3 =  Arrays.asList(1,2);
 		List<Integer> l4 = Arrays.asList(10,20);
-		List<Integer> r3 = Fusion(l3,l4);
+		List<Integer> r3 = fusion(l3,l4);
 		System.out.println(r3);
-		List<?> r4 = Fusion(l1,l3);
+		List<?> r4 = fusion(l1,l3);
 		System.out.println(r4);
 	}
 }
