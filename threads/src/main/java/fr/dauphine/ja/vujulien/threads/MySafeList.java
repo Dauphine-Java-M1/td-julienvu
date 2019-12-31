@@ -47,7 +47,7 @@ public class MySafeList extends  ArrayList<Double>{
 				threads[i]=new Thread(new Runnable() {
 					public void run() {
 						for (int j=0;j<m;j++) {
-							listthreads.add(2.0);
+							listthreads.add((double)j);
 						}
 					}
 				});
